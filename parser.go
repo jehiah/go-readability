@@ -1695,9 +1695,11 @@ func (ps *Parser) Parse(input io.Reader, pageURL string) (Article, error) {
 
 	// Parse page url
 	var err error
-	ps.documentURI, err = nurl.ParseRequestURI(pageURL)
-	if err != nil {
-		return Article{}, fmt.Errorf("failed to parse URL: %v", err)
+	if pageURL != "" {
+		ps.documentURI, err = nurl.ParseRequestURI(pageURL)
+		if err != nil {
+			return Article{}, fmt.Errorf("failed to parse URL: %v", err)
+		}
 	}
 
 	// Parse input
